@@ -11,7 +11,7 @@ const ProductDetailPage: React.FC = () => {
   useEffect(() => {
     if (id) {
       // 获取产品详情
-      fetch(`http://localhost:3001/api/products/${id}`)
+      fetch(`/api/products/${id}`)
         .then((response) => response.json())
         .then((data) => setSelectedProduct(data))
         .catch((error) => console.error('获取产品详情失败:', error));

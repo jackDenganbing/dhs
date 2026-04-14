@@ -8,13 +8,13 @@ const HomePage: React.FC = () => {
   
   useEffect(() => {
     // 获取水厂信息
-    fetch('http://localhost:3001/api/water-factory')
+    fetch('/api/water-factory')
       .then((response) => response.json())
       .then((data) => setFactory(data))
       .catch((error) => console.error('获取水厂信息失败:', error));
-    
+
     // 获取产品列表
-    fetch('http://localhost:3001/api/products')
+    fetch('/api/products')
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error('获取产品列表失败:', error));

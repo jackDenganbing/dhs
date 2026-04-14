@@ -20,13 +20,13 @@ const HealthPage: React.FC = () => {
   useEffect(() => {
     if (user) {
       // 获取用户提醒列表
-      fetch(`http://localhost:3001/api/reminders/${user.id}`)
+      fetch(`/api/reminders/${user.id}`)
         .then((response) => response.json())
         .then((data) => setReminders(data))
         .catch((error) => console.error('获取提醒列表失败:', error));
     }
   }, [user, setReminders]);
-  
+
   const handleAddReminder = () => {
     if (user) {
       const newReminder = {
@@ -35,8 +35,8 @@ const HealthPage: React.FC = () => {
         frequency,
         enabled
       };
-      
-      fetch('http://localhost:3001/api/reminders', {
+
+      fetch('/api/reminders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -54,15 +54,15 @@ const HealthPage: React.FC = () => {
         .catch((error) => console.error('创建提醒失败:', error));
     }
   };
-  
+
   const handleUpdateReminder = (id: number) => {
     const updatedReminder = {
       time,
       frequency,
       enabled
     };
-    
-    fetch(`http://localhost:3001/api/reminders/${id}`, {
+
+    fetch(`/api/reminders/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -73,19 +73,19 @@ const HealthPage: React.FC = () => {
       .then((data) => updateReminder(id, data))
       .catch((error) => console.error('更新提醒失败:', error));
   };
-  
+
   const handleDeleteReminder = (id: number) => {
-    fetch(`http://localhost:3001/api/reminders/${id}`, {
+    fetch(`/api/reminders/${id}`, {
       method: 'DELETE'
     })
       .then((response) => response.json())
       .then(() => deleteReminder(id))
       .catch((error) => console.error('删除提醒失败:', error));
   };
-  
+
   const handleEnergyQuery = () => {
     setLoading(true);
-    fetch(`http://localhost:3001/api/energy?drinkName=${encodeURIComponent(drinkName)}`)
+    fetch(`/api/energy?drinkName=${encodeURIComponent(drinkName)}`)
       .then((response) => response.json())
       .then((data) => {
         setEnergyResult(data);
@@ -96,7 +96,7 @@ const HealthPage: React.FC = () => {
             drinkName: data.name,
             energy: data.energy
           };
-          fetch('http://localhost:3001/api/query-history', {
+          fetch('/api/query-history', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

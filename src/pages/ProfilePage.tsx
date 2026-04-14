@@ -17,16 +17,16 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     if (user) {
       // 获取用户查询历史
-      fetch(`http://localhost:3001/api/query-history/${user.id}`)
+      fetch(`/api/query-history/${user.id}`)
         .then((response) => response.json())
         .then((data) => setHistory(data))
         .catch((error) => console.error('获取查询历史失败:', error));
     }
   }, [user, setHistory]);
-  
+
   const handleLogin = () => {
     setLoading(true);
-    fetch('http://localhost:3001/api/users/login', {
+    fetch('/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,10 +42,10 @@ const ProfilePage: React.FC = () => {
       .catch((error) => console.error('登录失败:', error))
       .finally(() => setLoading(false));
   };
-  
+
   const handleRegister = () => {
     setLoading(true);
-    fetch('http://localhost:3001/api/users', {
+    fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
